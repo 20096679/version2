@@ -2,7 +2,7 @@
 
 // import all required modules
 const logger = require('../utils/logger');
-const tangoPlaylistStore = require('../models/playlist-tango-store.js');
+const tandaStore = require('../models/playlist-tango-store.js');
 
 // create start object
 const start = {
@@ -12,13 +12,13 @@ const start = {
     
     // app statistics calculations
 
-    const tangoPlaylists = tangoPlaylistStore.getAllTangoPlaylists();
+    const tandas = tandaStore.getAllTandas();
 
-    let numTangoPlaylists = tangoPlaylists.length;
+    let numTandas = tandas.length;
 
     let numMelodies = 0;
 
-    for (let item of tangoPlaylists) {
+    for (let item of tandas) {
         numMelodies += item.melodies.length;
     }
     
@@ -28,7 +28,7 @@ const start = {
     // create view data object (contains data to be sent to the view e.g. page title)
     const viewDataRk = {
         title: 'Welcome to the Tango Playlist App!',
-        totalTangoPlaylists: numTangoPlaylists,
+        totalTandas: numTandas,
         totalMelodies: numMelodies,
     };
     
