@@ -61,4 +61,4 @@ ratebtn &&
 
 $(".delmelody").click(() => confirm('Really delete this tango?'))
 
-$(".deltangoPlaylist").click(() => confirm('Really delete this tango playlist?'))
+$(".deltanda").click(() => confirm('Really delete this tango playlist?'))

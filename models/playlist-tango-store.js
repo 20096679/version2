@@ -3,46 +3,46 @@
 const _ = require('lodash');
 const JsonTangoStore = require('./json-tango-store');
 
-const tangoPlaylistStore = {
+const tandaStore = {
 
-  store: new JsonTangoStore('./models/playlist-tango-store.json', { tangoPlaylistCollection: [] }),
-  collection: 'tangoPlaylistCollection',
+  store: new JsonTangoStore('./models/playlist-tango-store.json', { tandaCollection: [] }),
+  collection: 'tandaCollection',
 
-  getAllTangoPlaylists() {
+  getAllTandas() {
     return this.store.findRkAll(this.collection);
   },
 
-  getTangoPlaylist(id) {
+  getTanda(id) {
     return this.store.findOneRkBy(this.collection, { id: id });
   },
 
-  addTangoPlaylist(tangoPlaylist) {
-    this.store.addRk(this.collection, tangoPlaylist);
+  addTanda(tanda) {
+    this.store.addRk(this.collection, tanda);
   },
 
-  removeTangoPlaylist(id) {
-    const tangoPlaylist = this.getTangoPlaylist(id);
-    this.store.removeRk(this.collection, tangoPlaylist);
+  removeTanda(id) {
+    const tanda = this.getTanda(id);
+    this.store.removeRk(this.collection, tanda);
   },
 
-  removeAllTangoPlaylists() {
+  removeAllTandas() {
     this.store.removeRkAll(this.collection);
   },
 
   addMelody(id, melody) {
-    const tangoPlaylist = this.getTangoPlaylist(id);
-    tangoPlaylist.melodies.push(melody);
+    const tanda = this.getTanda(id);
+    tanda.melodies.push(melody);
   },
 
   removeMelody(id, melodyId) {
-    const tangoPlaylist = this.getTangoPlaylist(id);
-    const melodies = tangoPlaylist.melodies;
+    const tanda = this.getTanda(id);
+    const melodies = tanda.melodies;
     _.remove(melodies, { id: melodyId});
   },
   
   editMelody(id, melodyId, updatedMelody) {
-    const tangoPlaylist = this.getTangoPlaylist(id);
-    const melodies = tangoPlaylist.melodies;
+    const tanda = this.getTanda(id);
+    const melodies = tanda.melodies;
     const index = melodies.findIndex(melody => melody.id === melodyId);
     melodies[index].title = updatedMelody.title;
     melodies[index].artist = updatedMelody.artist;
@@ -51,4 +51,4 @@ const tangoPlaylistStore = {
   }
 };
 
-module.exports = tangoPlaylistStore;
+module.exports = tandaStore;

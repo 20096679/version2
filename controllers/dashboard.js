@@ -4,7 +4,7 @@
 const logger = require('../utils/logger');
 const uuid = require('uuid');
 
-const tangoPlaylistStore = require('../models/playlist-tango-store.js');
+const tandaStore = require('../models/playlist-tango-store.js');
 
 // create dashboard object
 const dashboard = {
@@ -18,29 +18,29 @@ const dashboard = {
     // create view data object (contains data to be sent to the view e.g. page title)
     const viewDataRk = {
       title: 'Tango Playlist App Dashboard',
-      tangoplaylists: tangoPlaylistStore.getAllTangoPlaylists(),
+      tandas: tandaStore.getAllTandas(),
     };
     
     // render the dashboard view and pass through the data
-    logger.info('about to render', viewDataRk.tangoplaylists);
+    logger.info('about to render', viewDataRk.tandas);
     response.render('dashboard', viewDataRk);
   },
   
-  deleteTangoPlaylist(request, response) {
-    const tangoPlaylistId = request.params.id;
-    logger.debug(`Deleting Tango Playlist ${tangoPlaylistId}`);
-    tangoPlaylistStore.removeTangoPlaylist(tangoPlaylistId);
+  deleteTanda(request, response) {
+    const tandaId = request.params.id;
+    logger.debug(`Deleting Tango Playlist ${tandaId}`);
+    tandaStore.removeTanda(tandaId);
     response.redirect('/dashboard');
   },
   
-  addTangoPlaylist(request, response) {
-    const newTangoPlayList = {
+  addTanda(request, response) {
+    const newTanda = {
       id: uuid(),
       title: request.body.title,
       duration: request.body.duration,
       melodies: [],
     };
-    tangoPlaylistStore.addTangoPlaylist(newTangoPlayList);
+    tandaStore.addTanda(newTanda);
     response.redirect('/dashboard');
   },
 };
